@@ -8,9 +8,10 @@ export default React.createClass({
       'completed': this.props.todo.isComplete
     });
 
-    return <li key={this.props.todo.title}
-               className={classes}>
-      <input type="checkbox" className="toggle" />
+    return <li className={classes}>
+      <input type="checkbox"
+             className="toggle"
+             onClick={() => this.props.toggle(this.props.todo)}/>
       <label>{this.props.todo.title}</label>
       <button className="destroy"></button>
     </li>;

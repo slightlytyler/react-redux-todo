@@ -3,22 +3,26 @@ import {expect} from 'chai';
 
 import TodoItem from '../../src/components/TodoItem';
 
-const {renderIntoDocument, scryRenderedDOMComponentsWithClass, Simulate}
-  = React.addons.TestUtils;
+const {
+  renderIntoDocument,
+  scryRenderedDOMComponentsWithClass,
+  scryRenderedDOMComponentsWithTag,
+  Simulate
+} = React.addons.TestUtils;
 
 describe('TodoItem', () => {
   const completeTodo = renderIntoDocument(
     <TodoItem todo={{
-        title: 'Complete',
-        isComplete: true
-      }} />
+                title: 'Complete',
+                isComplete: true
+              }} />
   );
 
   const incompleteTodo = renderIntoDocument(
     <TodoItem todo={{
-        title: 'Incomplete',
-        isComplete: false
-      }} />
+                title: 'Incomplete',
+                isComplete: false
+              }} />
   );
 
   it('renders a todo list item', () => {
@@ -34,6 +38,24 @@ describe('TodoItem', () => {
     const completedTodoItems = scryRenderedDOMComponentsWithClass(incompleteTodo, 'completed');
     expect(incompleteTodo).to.be.ok;
     expect(completedTodoItems.length).to.equal(0);
-  })
+  });
+
+  it('invokes a callback when the checkbox is clicked', () => {
+    let isToggled;
+
+    const toggle = (todo) => isToggled = !todo.isComplete;
+    const component = renderIntoDocument(
+      <TodoItem todo={{
+                  title: 'Incomplete',
+                  isComplete: false
+                }}
+                toggle={toggle} />
+    );
+
+    const checkbox = scryRenderedDOMComponentsWithTag(component, 'input');
+    Simulate.click(checkbox[0].getDOMNode());
+
+    expect(isToggled).to.equal(true);
+  });
 });
 
