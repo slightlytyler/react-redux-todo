@@ -1,5 +1,6 @@
 import React from 'react/addons';
 import {expect} from 'chai';
+import {Map} from 'immutable';
 
 import TodoItem from '../../src/components/TodoItem';
 
@@ -11,18 +12,36 @@ const {
 } = React.addons.TestUtils;
 
 describe('TodoItem', () => {
+  it('does update DOM when prop changes', () => {
+    const todo = Map({
+      title: 'Incomplete',
+      isComplete: false
+    });
+
+    const component = renderIntoDocument(
+      <TodoItem todo={todo} />
+    );
+
+    expect(component.getDOMNode().textContent).to.equal('Incomplete');
+
+    // const newTodo = todo.set('title', 'test');
+    // component.setProps({todo: newTodo});
+
+    // expect(component.getDOMNode().textContent).to.equal('test');
+  });
+
   const completeTodo = renderIntoDocument(
-    <TodoItem todo={{
+    <TodoItem todo={Map({
                 title: 'Complete',
                 isComplete: true
-              }} />
+              })} />
   );
 
   const incompleteTodo = renderIntoDocument(
-    <TodoItem todo={{
+    <TodoItem todo={Map({
                 title: 'Incomplete',
                 isComplete: false
-              }} />
+              })} />
   );
 
   it('renders a todo list item', () => {
@@ -45,10 +64,10 @@ describe('TodoItem', () => {
 
     const toggle = (todo) => isToggled = !todo.isComplete;
     const component = renderIntoDocument(
-      <TodoItem todo={{
+      <TodoItem todo={Map({
                   title: 'Incomplete',
                   isComplete: false
-                }}
+                })}
                 toggle={toggle} />
     );
 

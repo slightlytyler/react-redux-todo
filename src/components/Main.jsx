@@ -1,9 +1,11 @@
-import React from 'react';
+import React from 'react/addons';
 
 import TodoItem from './../components/TodoItem';
 import Footer from './../components/Footer';
 
 export default React.createClass({
+  mixins: [React.addons.PureRenderMixin],
+
   getTodos: function() {
     return this.props.todos || [];
   },

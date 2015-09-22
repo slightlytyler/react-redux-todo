@@ -1,6 +1,8 @@
-import React from 'react';
+import React from 'react/addons';
 
 export default React.createClass({
+  mixins: [React.addons.PureRenderMixin],
+
   getRemainingTodos: function() {
     return this.props.todos.filter(function(todo) {
       return !todo.isComplete;
@@ -14,7 +16,7 @@ export default React.createClass({
   render: function() {
     return <footer id="footer">
       <span id="todo-count">
-        <strong>{this.getRemainingTodos().length}</strong> todos left
+        <strong>{this.getRemainingTodos().size}</strong> todos left
       </span>
 
       <ul id="filters">
@@ -30,7 +32,7 @@ export default React.createClass({
       </ul>
 
       <button id="clear-completed">
-        Clear completed ({this.getCompletedTodos().length})
+        Clear completed ({this.getCompletedTodos().size})
       </button>
     </footer>;
   }

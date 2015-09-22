@@ -1,5 +1,6 @@
 import React from 'react/addons';
 import {expect} from 'chai';
+import {fromJS} from 'immutable';
 
 import Main from '../../src/components/Main';
 
@@ -10,14 +11,14 @@ describe('Main', () => {
 
   it('renders a list of todo items', () => {
     const component = renderIntoDocument(
-      <Main todos={[{
+      <Main todos={fromJS([{
           title: 'title 1',
           isComplete: false
         },
         {
           title: 'title 2',
           isComplete: false
-        }]} />
+        }])} />
     );
     const todoItems = scryRenderedDOMComponentsWithClass(component, 'todo-item');
 
