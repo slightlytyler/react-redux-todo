@@ -1,6 +1,6 @@
 import React from 'react';
 import Main from './component/Main';
-import Footer from './component/Footer';
+
 
 require('./styles.css');
 
@@ -22,7 +22,9 @@ const todos = [
 React.render(
   <div>
     <Main todos={todos} />
-    <Footer />
+    <footer id="info">
+      <p>Double-click to edit a todo</p>
+    </footer>
   </div>,
   document.getElementById('app')
 );

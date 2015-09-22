@@ -1,5 +1,8 @@
 import React from 'react';
 
+import TodoItem from './../component/TodoItem';
+import Footer from './../component/Footer';
+
 export default React.createClass({
   getTodos: function() {
     return this.props.todos || [];
@@ -14,36 +17,14 @@ export default React.createClass({
       <section id="main">
         <ul id="todo-list">
           {this.getTodos().map(todo =>
-            <li key={todo.title} className={todo.isComplete ? 'completed' : ''}>
-              <input type="checkbox" className="toggle" />
-              <label>{todo.title}</label>
-              <button className="destroy"></button>
-            </li>
+            <TodoItem todo={todo} />
           )}
         </ul>
 
         <input type="checkbox" id="toggle-all" />
       </section>
 
-      <footer id="footer">
-        <span id="todo-count">
-          <strong>2</strong> todos left</span>
-        <ul id="filters">
-          <li>
-            <a href="all" className="selected">All</a>
-          </li>
-          <li>
-            <a href="active">Active</a>
-          </li>
-          <li>
-            <a href="completed">Completed</a>
-          </li>
-        </ul>
-
-        <button id="clear-completed">
-          Clear completed (1)
-        </button>
-      </footer>
+      <Footer todos={this.getTodos()} />
     </section>;
   }
 });
