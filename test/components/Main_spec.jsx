@@ -2,7 +2,7 @@ import React from 'react/addons';
 import {expect} from 'chai';
 import {fromJS} from 'immutable';
 
-import Main from '../../src/components/Main';
+import {Main} from '../../src/components/Main';
 
 const {renderIntoDocument, scryRenderedDOMComponentsWithClass}
   = React.addons.TestUtils;
