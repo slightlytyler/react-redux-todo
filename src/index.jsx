@@ -14,12 +14,15 @@ store.dispatch({
   type: 'SET_STATE',
   state: {
     todos: [{
+      id: 1,
       title: 'Learn react and redux',
       isComplete: true
     }, {
+      id: 2,
       title: '...',
       isComplete: true
     }, {
+      id: 3,
       title: 'Profit',
       isComplete: false
     }]

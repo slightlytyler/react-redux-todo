@@ -103,4 +103,40 @@ describe('reducer', () => {
     }));
   });
 
+  it('handles TOGGLE_COMPLETE by toggling the value of isComplete', () => {
+    const state = fromJS({
+      todos: [{
+        id: 1,
+        title: 'Learn react and redux',
+        isComplete: false
+      }, {
+        id: 2,
+        title: '...',
+        isComplete: false
+      }, {
+        id: 3,
+        title: 'Profit',
+        isComplete: false
+      }]
+    });
+    const action = {type: 'TOGGLE_COMPLETE', id: 1};
+    const nextState = reducer(state, action);
+
+    expect(nextState).to.equal(fromJS({
+      todos: [{
+        id: 1,
+        title: 'Learn react and redux',
+        isComplete: true
+      }, {
+        id: 2,
+        title: '...',
+        isComplete: false
+      }, {
+        id: 3,
+        title: 'Profit',
+        isComplete: false
+      }]
+    }));
+  });
+
 });
