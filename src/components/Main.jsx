@@ -1,7 +1,7 @@
 import React from 'react';
 
-import TodoItem from './../component/TodoItem';
-import Footer from './../component/Footer';
+import TodoItem from './../components/TodoItem';
+import Footer from './../components/Footer';
 
 export default React.createClass({
   getTodos: function() {
@@ -17,7 +17,8 @@ export default React.createClass({
       <section id="main">
         <ul id="todo-list">
           {this.getTodos().map(todo =>
-            <TodoItem todo={todo} />
+            <TodoItem todo={todo}
+                      key={todo.title} />
           )}
         </ul>
 
