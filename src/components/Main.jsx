@@ -1,9 +1,10 @@
 import React from 'react/addons';
+import {connect} from 'react-redux';
 
 import TodoItem from './../components/TodoItem';
 import Footer from './../components/Footer';
 
-export default React.createClass({
+export const Main = React.createClass({
   mixins: [React.addons.PureRenderMixin],
 
   getTodos: function() {
@@ -31,3 +32,11 @@ export default React.createClass({
     </section>;
   }
 });
+
+function mapStateToProps(state) {
+  return {
+    todos: state.get('todos')
+  }
+}
+
+export const MainContainer = connect(mapStateToProps)(Main);

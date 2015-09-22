@@ -3,8 +3,9 @@ import { fromJS } from 'immutable';
 
 import {createStore} from 'redux';
 import reducer from './reducer';
+import {Provider} from 'react-redux';
 
-import Main from './components/Main';
+import { MainContainer } from './components/Main';
 
 require('./styles.css');
 
@@ -25,28 +26,16 @@ store.dispatch({
   }
 });
 
-const todos = fromJS([
-  {
-    title: 'Learn react and redux',
-    isComplete: true
-  },
-  {
-    title: '...',
-    isComplete: true
-  },
-  {
-    title: 'Profit',
-    isComplete: false
-  },
-]);
-
 React.render(
-  <div>
-    <Main todos={todos} />
+  <Provider store={store}>
+    {() => <div>
+      <MainContainer />
 
-    <footer id="info">
-      <p>Double-click to edit a todo</p>
-    </footer>
-  </div>,
+      <footer id="info">
+        <p>Double-click to edit a todo</p>
+      </footer>
+    </div>
+    }
+  </Provider>,
   document.getElementById('app')
 );
