@@ -1,10 +1,12 @@
 import React from 'react';
+import { fromJS } from 'immutable';
+
 import Main from './components/Main';
 
 
 require('./styles.css');
 
-const todos = [
+const todos = fromJS([
   {
     title: 'Learn react and redux',
     isComplete: true
@@ -17,7 +19,7 @@ const todos = [
     title: 'Profit',
     isComplete: false
   },
-];
+]);
 
 React.render(
   <div>
