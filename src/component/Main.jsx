@@ -1,6 +1,9 @@
 import React from 'react';
 
 export default React.createClass({
+  getTodos: function() {
+    return this.props.todos || [];
+  },
   render: function() {
     return <section id="todoapp">
       <header id="header">
@@ -10,18 +13,13 @@ export default React.createClass({
 
       <section id="main">
         <ul id="todo-list">
-          <li className="completed">
-            <input type="checkbox" className="toggle" />
-            <label>Learn Ember.js</label><button className="destroy"></button>
-          </li>
-          <li>
-            <input type="checkbox" className="toggle" />
-            <label>...</label><button className="destroy"></button>
-          </li>
-          <li>
-            <input type="checkbox" className="toggle" />
-            <label>Profit!</label><button className="destroy"></button>
-          </li>
+          {this.getTodos().map(todo =>
+            <li key={todo.title} className={todo.isComplete ? 'completed' : ''}>
+              <input type="checkbox" className="toggle" />
+              <label>{todo.title}</label>
+              <button className="destroy"></button>
+            </li>
+          )}
         </ul>
 
         <input type="checkbox" id="toggle-all" />
