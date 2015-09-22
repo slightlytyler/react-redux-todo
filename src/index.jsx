@@ -1,10 +1,29 @@
 import React from 'react';
 import { fromJS } from 'immutable';
 
+import {createStore} from 'redux';
+import reducer from './reducer';
+
 import Main from './components/Main';
 
-
 require('./styles.css');
+
+const store = createStore(reducer);
+store.dispatch({
+  type: 'SET_STATE',
+  state: {
+    todos: [{
+      title: 'Learn react and redux',
+      isComplete: true
+    }, {
+      title: '...',
+      isComplete: true
+    }, {
+      title: 'Profit',
+      isComplete: false
+    }]
+  }
+});
 
 const todos = fromJS([
   {
