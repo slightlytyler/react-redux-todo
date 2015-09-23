@@ -25,7 +25,8 @@ export const Main = React.createClass({
           {todos.map(todo =>
             <TodoItem key={todo.get('id')}
                       todo={todo}
-                      toggle={actions.toggleComplete}/>
+                      toggle={actions.toggleComplete}
+                      removeTodo={actions.removeTodo} />
           )}
         </ul>
 

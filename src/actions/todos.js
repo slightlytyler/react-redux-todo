@@ -8,3 +8,7 @@ export function toggleComplete(id) {
   return { type: types.TOGGLE_COMPLETE, id };
 }
 
+export function removeTodo(id) {
+  return { type: types.REMOVE_TODO, id };
+}
+
