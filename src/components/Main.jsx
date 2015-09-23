@@ -11,6 +11,16 @@ import Footer from './../components/Footer';
 export const Main = React.createClass({
   mixins: [React.addons.PureRenderMixin],
 
+  allTodosComplete: function() {
+    const todos = this.props.todos;
+
+    if (todos.size !== 0) {
+      return todos.filter(todo =>
+        !todo.get('isComplete')
+      ).size === 0;
+    }
+  },
+
   render: function() {
     const { todos, dispatch } = this.props;
     const actions = bindActionCreators(TodoActions, dispatch);
@@ -28,7 +38,10 @@ export const Main = React.createClass({
           )}
         </ul>
 
-        <input type="checkbox" id="toggle-all" />
+        <input type="checkbox"
+               id="toggle-all"
+               checked={this.allTodosComplete()}
+               onChange={() => actions.toggleAllTodos} />
       </section>
 
       <Footer todos={todos} />

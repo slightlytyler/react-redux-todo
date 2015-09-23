@@ -5,12 +5,12 @@ export default React.createClass({
 
   getRemainingTodos: function() {
     return this.props.todos.filter(function(todo) {
-      return !todo.isComplete;
+      return !todo.get('isComplete');
     });
   },
   getCompletedTodos: function() {
     return this.props.todos.filter(function(todo) {
-      return todo.isComplete;
+      return todo.get('isComplete');
     });
   },
   render: function() {
