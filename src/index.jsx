@@ -1,33 +1,31 @@
 import React from 'react';
 import { fromJS } from 'immutable';
 
-import {createStore} from 'redux';
+import { createStore } from 'redux';
 import reducer from './reducer';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 
+import { setState } from './actions/todos';
 import { MainContainer } from './components/Main';
 
 require('./styles.css');
 
 const store = createStore(reducer);
-store.dispatch({
-  type: 'SET_STATE',
-  state: {
-    todos: [{
-      id: 1,
-      title: 'Learn react and redux',
-      isComplete: true
-    }, {
-      id: 2,
-      title: '...',
-      isComplete: true
-    }, {
-      id: 3,
-      title: 'Profit',
-      isComplete: false
-    }]
-  }
-});
+store.dispatch(setState({
+  todos: [{
+    id: 1,
+    title: 'Learn react and redux',
+    isComplete: true
+  }, {
+    id: 2,
+    title: '...',
+    isComplete: true
+  }, {
+    id: 3,
+    title: 'Profit',
+    isComplete: false
+  }]
+}));
 
 React.render(
   <Provider store={store}>

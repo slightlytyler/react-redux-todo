@@ -1,6 +1,6 @@
 import React from 'react/addons';
-import {expect} from 'chai';
-import {Map} from 'immutable';
+import { expect } from 'chai';
+import { Map } from 'immutable';
 
 import TodoItem from '../../src/components/TodoItem';
 
@@ -60,9 +60,9 @@ describe('TodoItem', () => {
   });
 
   it('invokes a callback when the checkbox is clicked', () => {
-    let isToggled;
+    let isToggled = false;
 
-    const toggle = (todo) => isToggled = !todo.isComplete;
+    const toggle = () => isToggled = true;
     const component = renderIntoDocument(
       <TodoItem todo={Map({
                   title: 'Incomplete',
@@ -72,7 +72,7 @@ describe('TodoItem', () => {
     );
 
     const checkbox = scryRenderedDOMComponentsWithTag(component, 'input');
-    Simulate.click(checkbox[0].getDOMNode());
+    Simulate.change(checkbox[0].getDOMNode());
 
     expect(isToggled).to.equal(true);
   });

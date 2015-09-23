@@ -1,5 +1,8 @@
 import React from 'react/addons';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import * as TodoActions from '../actions/todos';
 
 import TodoItem from './../components/TodoItem';
 import Footer from './../components/Footer';
@@ -7,10 +10,10 @@ import Footer from './../components/Footer';
 export const Main = React.createClass({
   mixins: [React.addons.PureRenderMixin],
 
-  getTodos: function() {
-    return this.props.todos || [];
-  },
   render: function() {
+    const { todos, dispatch } = this.props;
+    const actions = bindActionCreators(TodoActions, dispatch);
+
     return <section id="todoapp">
       <header id="header">
         <h1>todos</h1>
@@ -19,16 +22,17 @@ export const Main = React.createClass({
 
       <section id="main">
         <ul id="todo-list">
-          {this.getTodos().map(todo =>
-            <TodoItem todo={todo}
-                      key={todo.title} />
+          {todos.map(todo =>
+            <TodoItem key={todo.get('id')}
+                      todo={todo}
+                      toggle={actions.toggleComplete}/>
           )}
         </ul>
 
         <input type="checkbox" id="toggle-all" />
       </section>
 
-      <Footer todos={this.getTodos()} />
+      <Footer todos={todos} />
     </section>;
   }
 });
