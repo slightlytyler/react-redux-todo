@@ -1,4 +1,5 @@
 import { Map, fromJS } from 'immutable';
+import getNewId from './helpers/get_new_id'
 
 function setState(state, newState) {
   return state.merge(newState);
@@ -14,7 +15,7 @@ function toggleComplete(todosState, id) {
 
 function addTodo(todosState, title) {
   return fromJS([{
-    id: todosState.reduce((maxId, todo) => Math.max(todo.get('id'), maxId), -1) + 1,
+    id: getNewId(todosState),
     title: title,
     isComplete: false
   }, ...todosState]);
