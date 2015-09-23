@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as TodoActions from '../actions/todos';
 
 import TodoItem from './../components/TodoItem';
+import Header from './../components/Header';
 import Footer from './../components/Footer';
 
 export const Main = React.createClass({
@@ -15,10 +16,7 @@ export const Main = React.createClass({
     const actions = bindActionCreators(TodoActions, dispatch);
 
     return <section id="todoapp">
-      <header id="header">
-        <h1>todos</h1>
-        <input type="text" id="new-todo" placeholder="What needs to be done?" />
-      </header>
+      <Header addTodo={actions.addTodo}/>
 
       <section id="main">
         <ul id="todo-list">
