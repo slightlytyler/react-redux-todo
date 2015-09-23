@@ -15,10 +15,11 @@ export const Main = React.createClass({
     const todos = this.props.todos;
 
     if (todos.size !== 0) {
-      return todos.filter(todo =>
-        !todo.get('isComplete')
-      ).size === 0;
+      return todos.every(todo =>
+        todo.get('isComplete')
+      )
     }
+    return false;
   },
 
   render: function() {
@@ -41,7 +42,7 @@ export const Main = React.createClass({
         <input type="checkbox"
                id="toggle-all"
                checked={this.allTodosComplete()}
-               onChange={() => actions.toggleAllTodos} />
+               onChange={actions.toggleAll} />
       </section>
 
       <Footer todos={todos} />
