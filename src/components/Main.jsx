@@ -45,7 +45,8 @@ export const Main = React.createClass({
                onChange={actions.toggleAll} />
       </section>
 
-      <Footer todos={todos} />
+      <Footer todos={todos}
+              removeComplete={actions.removeComplete} />
     </section>;
   }
 });

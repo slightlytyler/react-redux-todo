@@ -7,3 +7,5 @@ export const TOGGLE_ALL = 'TOGGLE_ALL';
 export const ADD_TODO = 'ADD_TODO';
 
 export const REMOVE_TODO = 'REMOVE_TODO';
+
+export const REMOVE_COMPLETE = 'REMOVE_COMPLETE';

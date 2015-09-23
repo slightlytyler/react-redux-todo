@@ -31,7 +31,8 @@ export default React.createClass({
         </li>
       </ul>
 
-      <button id="clear-completed">
+      <button id="clear-completed"
+              onClick={this.props.removeComplete}>
         Clear completed ({this.getCompletedTodos().size})
       </button>
     </footer>;

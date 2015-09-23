@@ -20,3 +20,7 @@ export function removeTodo(id) {
   return { type: types.REMOVE_TODO, id };
 }
 
+export function removeComplete() {
+  return { type: types.REMOVE_COMPLETE };
+}
+

@@ -37,6 +37,12 @@ function removeTodo(todosState, id) {
   );
 }
 
+function removeComplete(todosState) {
+  return todosState.filter(todo =>
+    !todo.get('isComplete')
+  );
+}
+
 export default function(state = Map(), action) {
   switch (action.type) {
   case 'SET_STATE':
@@ -49,6 +55,8 @@ export default function(state = Map(), action) {
     return state.update('todos', todosState => addTodo(todosState, action.title));
   case 'REMOVE_TODO':
     return state.update('todos', todosState => removeTodo(todosState, action.id));
+  case 'REMOVE_COMPLETE':
+    return state.update('todos', todosState => removeComplete(todosState));
   }
   return state;
 }
