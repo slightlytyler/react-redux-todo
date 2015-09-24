@@ -1,4 +1,6 @@
 import React, { PropTypes, Component } from 'react/addons';
+import { Link } from 'react-router'
+
 import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/todo_filters';
 
 const FILTER_TITLES = {
@@ -25,9 +27,9 @@ class Footer extends Component {
 
     return (
       <li key={filter}>
-        <a href={title.toLowerCase()}>
+        <Link to={`/${title.toLowerCase()}`}>
           {title}
-        </a>
+        </Link>
       </li>
     );
   }

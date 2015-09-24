@@ -1,11 +1,15 @@
 import React from 'react';
-import { fromJS } from 'immutable';
+import Router, {Route, DefaultRoute} from 'react-router';
 
 import { createStore } from 'redux';
-import reducer from './reducer';
 import { Provider } from 'react-redux';
+import reducer from './reducer';
+
+import { fromJS } from 'immutable';
 
 import { setState } from './actions/todos';
+
+import App from './components/App';
 import { MainContainer } from './components/Main';
 
 require('./styles.css');
@@ -27,16 +31,19 @@ store.dispatch(setState({
   }]
 }));
 
-React.render(
-  <Provider store={store}>
-    {() => <div>
-      <MainContainer />
+const routes = <Route handler={App}>
+  <DefaultRoute handler={MainContainer} />
 
-      <footer id="info">
-        <p>Double-click to edit a todo</p>
-      </footer>
-    </div>
-    }
-  </Provider>,
-  document.getElementById('app')
-);
+  <Route path="/all" handler={MainContainer} />
+  <Route path="/active" handler={MainContainer} />
+  <Route path="/completed" handler={MainContainer} />
+</Route>;
+
+Router.run(routes, (Root) => {
+  React.render(
+    <Provider store={store}>
+      {() => <Root />}
+    </Provider>,
+    document.getElementById('app')
+  );
+});
