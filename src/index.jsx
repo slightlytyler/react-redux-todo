@@ -35,9 +35,10 @@ React.render((
   <Provider store={store}>
     {() =>
       <Router history={createBrowserHistory()}>
-        <Route path="/" component={AppContainer}>
-
-        </Route>
+        <Route path="/" component={AppContainer}></Route>
+        <Route path="/all" component={AppContainer}></Route>
+        <Route path="/completed" component={AppContainer} filter="completed"></Route>
+        <Route path="/active" component={AppContainer} filter="active"></Route>
       </Router>
     }
   </Provider>

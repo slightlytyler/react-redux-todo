@@ -350,7 +350,7 @@ label[for='toggle-all'] {
   text-decoration: none;
 }
 
-#filters li a.selected {
+#filters li a.active {
   font-weight: bold;
 }
 

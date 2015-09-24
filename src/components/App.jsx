@@ -7,9 +7,23 @@ import * as TodoActions from '../actions/todos';
 import Main from './Main';
 
 export const App = React.createClass({
+  filteredTodos: function() {
+    const filter = this.props.route.filter;
+    const filterBool = filter === 'completed';
+
+    if (filter) {
+      return this.props.todos.filter(todo =>
+        todo.get('isComplete') === filterBool
+      );
+    } else {
+      return false;
+    }
+  },
   render: function() {
-    const { todos, dispatch } = this.props;
+    const { dispatch } = this.props;
     const actions = bindActionCreators(TodoActions, dispatch);
+
+    const todos = this.filteredTodos() || this.props.todos;
 
     return <div>
       <Main todos={todos} {...actions}/>
