@@ -1,18 +1,18 @@
 import React from 'react/addons';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
-import * as TodoActions from '../actions/todos';
 
 import TodoItem from './../components/TodoItem';
 import Header from './../components/Header';
 import Footer from './../components/Footer';
 
-export const Main = React.createClass({
+export default React.createClass({
   mixins: [React.addons.PureRenderMixin],
 
+  getTodos: function() {
+    return this.props.todos || [];
+  },
+
   allTodosComplete: function() {
-    const todos = this.props.todos;
+    const todos = this.getTodos();
 
     if (todos.size !== 0) {
       return todos.every(todo =>
@@ -23,38 +23,36 @@ export const Main = React.createClass({
   },
 
   render: function() {
-    const { todos, dispatch } = this.props;
-    const actions = bindActionCreators(TodoActions, dispatch);
+    const {
+      addTodo,
+      toggleComplete,
+      removeTodo,
+      toggleAll,
+      removeComplete
+    } = this.props;
+    const todos = this.getTodos();
 
     return <section id="todoapp">
-      <Header addTodo={actions.addTodo}/>
+      <Header addTodo={addTodo}/>
 
       <section id="main">
         <ul id="todo-list">
           {todos.map(todo =>
             <TodoItem key={todo.get('id')}
                       todo={todo}
-                      toggle={actions.toggleComplete}
-                      removeTodo={actions.removeTodo} />
+                      toggle={toggleComplete}
+                      removeTodo={removeTodo} />
           )}
         </ul>
 
         <input type="checkbox"
                id="toggle-all"
                checked={this.allTodosComplete()}
-               onChange={actions.toggleAll} />
+               onChange={toggleAll} />
       </section>
 
       <Footer todos={todos}
-              removeComplete={actions.removeComplete} />
+              removeComplete={removeComplete} />
     </section>;
   }
 });
-
-function mapStateToProps(state) {
-  return {
-    todos: state.get('todos')
-  }
-}
-
-export const MainContainer = connect(mapStateToProps)(Main);

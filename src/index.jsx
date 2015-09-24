@@ -1,5 +1,6 @@
 import React from 'react';
-import Router, {Route, DefaultRoute} from 'react-router';
+import { Router, Route } from 'react-router';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -9,8 +10,7 @@ import { fromJS } from 'immutable';
 
 import { setState } from './actions/todos';
 
-import App from './components/App';
-import { MainContainer } from './components/Main';
+import { AppContainer } from './components/App';
 
 require('./styles.css');
 
@@ -31,19 +31,14 @@ store.dispatch(setState({
   }]
 }));
 
-const routes = <Route handler={App}>
-  <DefaultRoute handler={MainContainer} />
+React.render((
+  <Provider store={store}>
+    {() =>
+      <Router history={createBrowserHistory()}>
+        <Route path="/" component={AppContainer}>
 
-  <Route path="/all" handler={MainContainer} />
-  <Route path="/active" handler={MainContainer} />
-  <Route path="/completed" handler={MainContainer} />
-</Route>;
-
-Router.run(routes, (Root) => {
-  React.render(
-    <Provider store={store}>
-      {() => <Root />}
-    </Provider>,
-    document.getElementById('app')
-  );
-});
+        </Route>
+      </Router>
+    }
+  </Provider>
+), document.getElementById('app'))
