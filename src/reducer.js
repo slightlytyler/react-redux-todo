@@ -1,4 +1,4 @@
-import { Map, fromJS } from 'immutable';
+import { Map, List, fromJS } from 'immutable';
 import getNewId from './helpers/get_new_id'
 
 function setState(state, newState) {
@@ -6,21 +6,23 @@ function setState(state, newState) {
 }
 
 function toggleComplete(todosState, id) {
-  return todosState.map(todo =>
-      todo.get('id') === id ?
-      todo.set('isComplete', !todo.get('isComplete')) :
-      todo
-  );
-}
-
-function toggleAll(todosState) {
-  const hasIncompleteTodos = todosState.some(todo =>
+  const ids = List.isList(id) ? id : List.of(id);
+  const currentTodos = todosState.filter((todo) => {
+    return ids.includes(todo.get('id'))
+  });
+  const hasIncompleteTodos = currentTodos.some(todo =>
     !todo.get('isComplete')
   );
 
   return todosState.map(todo =>
-    todo.set('isComplete', hasIncompleteTodos)
+    currentTodos.includes(todo) ?
+    todo.set('isComplete', hasIncompleteTodos) :
+    todo
   );
+}
+
+function toggleAll(todosState) {
+
 }
 
 function addTodo(todosState, title) {

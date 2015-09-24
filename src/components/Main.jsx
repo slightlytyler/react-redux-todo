@@ -48,7 +48,7 @@ export default React.createClass({
         <input type="checkbox"
                id="toggle-all"
                checked={this.allTodosComplete()}
-               onChange={toggleAll} />
+               onChange={() => toggleComplete(todos.map(todo => todo.get('id')))} />
       </section>
 
       <Footer todos={todos}

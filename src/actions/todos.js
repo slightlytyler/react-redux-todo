@@ -8,10 +8,6 @@ export function toggleComplete(id) {
   return { type: types.TOGGLE_COMPLETE, id };
 }
 
-export function toggleAll() {
-  return { type: types.TOGGLE_ALL };
-}
-
 export function addTodo(title) {
   return { type: types.ADD_TODO, title };
 }

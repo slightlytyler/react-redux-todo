@@ -1,6 +1,5 @@
 import React from 'react';
 import { Router, Route } from 'react-router';
-import createBrowserHistory from 'history/lib/createBrowserHistory';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -34,7 +33,7 @@ store.dispatch(setState({
 React.render((
   <Provider store={store}>
     {() =>
-      <Router history={createBrowserHistory()}>
+      <Router>
         <Route path="/" component={AppContainer}></Route>
         <Route path="/all" component={AppContainer}></Route>
         <Route path="/completed" component={AppContainer} filter="completed"></Route>
