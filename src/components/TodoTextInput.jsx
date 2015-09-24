@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react/addons';
 
 class TodoTextInput extends Component {
   constructor(props, context) {

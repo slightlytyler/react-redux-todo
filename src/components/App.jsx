@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react/addons';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -6,8 +6,8 @@ import * as TodoActions from '../actions/todos';
 
 import Main from './Main';
 
-export const App = React.createClass({
-  filteredTodos: function() {
+export class App extends Component {
+  filteredTodos() {
     const filter = this.props.route.filter;
     const filterBool = filter === 'completed';
 
@@ -18,8 +18,9 @@ export const App = React.createClass({
     } else {
       return false;
     }
-  },
-  render: function() {
+  }
+
+  render() {
     const { dispatch } = this.props;
     const actions = bindActionCreators(TodoActions, dispatch);
 
@@ -33,7 +34,9 @@ export const App = React.createClass({
       </footer>
     </div>;
   }
-});
+};
+
+App.mixins = [React.addons.PureRenderMixin];
 
 function mapStateToProps(state) {
   return {

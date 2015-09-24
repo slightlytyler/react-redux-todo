@@ -1,9 +1,7 @@
-import React from 'react/addons';
+import React, { Component, PropTypes } from 'react/addons';
 
-export default React.createClass({
-  mixins: [React.addons.PureRenderMixin],
-
-  render: function() {
+export class TodoItem extends Component {
+  render() {
     const { todo } = this.props;
 
     var cx = React.addons.classSet;
@@ -25,4 +23,8 @@ export default React.createClass({
       </button>
     </li>;
   }
-});
+};
+
+TodoItem.mixins = [React.addons.PureRenderMixin];
+
+export default TodoItem;

@@ -1,17 +1,15 @@
-import React from 'react/addons';
+import React, { Component, PropTypes } from 'react/addons';
 
 import TodoItem from './../components/TodoItem';
 import Header from './../components/Header';
 import Footer from './../components/Footer';
 
-export default React.createClass({
-  mixins: [React.addons.PureRenderMixin],
-
-  getTodos: function() {
+class Main extends Component {
+  getTodos() {
     return this.props.todos || [];
-  },
+  }
 
-  allTodosComplete: function() {
+  allTodosComplete() {
     const todos = this.getTodos();
 
     if (todos.size !== 0) {
@@ -20,9 +18,9 @@ export default React.createClass({
       )
     }
     return false;
-  },
+  }
 
-  render: function() {
+  render() {
     const {
       addTodo,
       toggleComplete,
@@ -55,4 +53,8 @@ export default React.createClass({
               removeComplete={removeComplete} />
     </section>;
   }
-});
+};
+
+Main.mixins = [React.addons.PureRenderMixin];
+
+export default Main;
