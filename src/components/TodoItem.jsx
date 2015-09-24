@@ -12,7 +12,7 @@ export default React.createClass({
       'completed': todo.get('isComplete')
     });
 
-    return <li className={classes}>
+    return <li id={todo.get('id')} className={classes}>
       <input type="checkbox"
              className="toggle"
              checked={todo.get('isComplete')}
