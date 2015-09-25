@@ -21,8 +21,15 @@ class TodoTextInput extends Component {
   }
 
   render() {
+    var cx = React.addons.classSet;
+    var classes = cx({
+      edit: this.props.editing,
+      'new-todo': this.props.newTodo
+    });
+
     return <input type="text"
                   id={this.props.id}
+                  className={classes}
                   placeholder={this.props.placeholder}
                   onChange={this.handleChange.bind(this)}
                   onKeyDown={this.handleSubmit.bind(this)}
