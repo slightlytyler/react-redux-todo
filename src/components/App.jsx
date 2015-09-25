@@ -29,7 +29,7 @@ export class App extends Component {
     return <div>
       <Main todos={todos} {...actions}/>
 
-      <footer id="info">
+      <footer className="info">
         <p>Double-click to edit a todo</p>
       </footer>
     </div>;

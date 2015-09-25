@@ -30,11 +30,11 @@ class Main extends Component {
     } = this.props;
     const todos = this.getTodos();
 
-    return <section id="todoapp">
+    return <section className="todoapp">
       <Header addTodo={addTodo}/>
 
-      <section id="main">
-        <ul id="todo-list">
+      <section className="main">
+        <ul className="todo-list">
           {todos.map(todo =>
             <TodoItem key={todo.get('id')}
                       todo={todo}
@@ -44,7 +44,7 @@ class Main extends Component {
         </ul>
 
         <input type="checkbox"
-               id="toggle-all"
+               className="toggle-all"
                checked={this.allTodosComplete()}
                onChange={() => toggleComplete(todos.map(todo => todo.get('id')))} />
       </section>

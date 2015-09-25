@@ -27,7 +27,7 @@ export class TodoItem extends Component {
       );
     } else {
       element = (
-        <div class="wrapper">
+        <div className="wrapper">
           <input type="checkbox"
                className="toggle"
                checked={todo.get('isComplete')}
@@ -51,7 +51,7 @@ export class TodoItem extends Component {
       'editing': this.state.editing
     });
 
-    return <li id={todo.get('id')} className={classes}>
+    return <li className={classes}>
       {element}
     </li>;
   }

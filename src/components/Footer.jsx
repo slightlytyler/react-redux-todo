@@ -37,18 +37,18 @@ class Footer extends Component {
 
   render() {
     return (
-      <footer id="footer">
-        <span id="todo-count">
+      <footer className="footer">
+        <span className="todo-count">
           <strong>{this.getRemainingTodos().size}</strong> todos left
         </span>
 
-        <ul id="filters">
+        <ul className="filters">
           {[SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED].map(filter =>
             this.renderFilter(filter)
           )}
         </ul>
 
-        <button id="clear-completed"
+        <button className="clear-completed"
                 disabled={this.getCompletedTodos().size === 0}
                 onClick={this.props.removeComplete}>
           Clear completed ({this.getCompletedTodos().size})

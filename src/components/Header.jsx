@@ -9,7 +9,7 @@ export class Header extends Component {
   }
 
   render() {
-    return <header id="header">
+    return <header className="header">
       <h1>todos</h1>
 
       <TodoTextInput newTodo
