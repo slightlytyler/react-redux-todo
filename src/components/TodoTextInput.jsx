@@ -8,6 +8,12 @@ class TodoTextInput extends Component {
     };
   }
 
+  componentDidMount() {
+    var node = React.findDOMNode(this.refs.input);
+        node.focus();
+        node.setSelectionRange(node.value.length, node.value.length);
+  }
+
   handleSubmit(e) {
     const text = e.target.value.trim();
     if (e.which === 13) {
@@ -33,11 +39,10 @@ class TodoTextInput extends Component {
       'new-todo': this.props.newTodo
     });
 
-    return <input type="text"
+    return <input ref="input" type="text"
                   id={this.props.id}
                   className={classes}
                   placeholder={this.props.placeholder}
-                  autoFocus="true"
                   onChange={this.handleChange.bind(this)}
                   onBlur={this.handleBlur.bind(this)}
                   onKeyDown={this.handleSubmit.bind(this)}
