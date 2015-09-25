@@ -27,8 +27,8 @@ class Footer extends Component {
 
     return (
       <li key={filter}>
-        <Link to={`/${title.toLowerCase()}`}
-              activeClassName="active">
+        <Link to={`/${title === 'All' ? '' : title.toLowerCase()}`}
+              activeClassName="selected">
           {title}
         </Link>
       </li>
