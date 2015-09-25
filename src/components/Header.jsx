@@ -15,7 +15,7 @@ export class Header extends Component {
       <TodoTextInput newTodo
                      id="new-todo"
                      placeholder="What needs to be done?"
-                     onSave={this.handleSave} />
+                     onSave={this.handleSave.bind(this)} />
     </header>;
   }
 };

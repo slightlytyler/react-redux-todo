@@ -323,6 +323,10 @@ html .clear-completed:active {
   text-decoration: underline;
 }
 
+.clear-completed:disabled:hover {
+  text-decoration: none;
+}
+
 .info {
   margin: 65px auto 0;
   color: #bfbfbf;
