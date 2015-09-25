@@ -24,6 +24,7 @@ class Main extends Component {
     const {
       addTodo,
       toggleComplete,
+      editTodo,
       removeTodo,
       toggleAll,
       removeComplete
@@ -39,7 +40,8 @@ class Main extends Component {
             <TodoItem key={todo.get('id')}
                       todo={todo}
                       toggle={toggleComplete}
-                      removeTodo={removeTodo} />
+                      removeTodo={removeTodo}
+                      editTodo={editTodo} />
           )}
         </ul>
 

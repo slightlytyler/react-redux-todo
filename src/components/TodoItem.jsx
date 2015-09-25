@@ -10,6 +10,16 @@ export class TodoItem extends Component {
     };
   }
 
+  handleSave(id, text) {
+    if (text.length === 0) {
+      this.props.removeTodo(id);
+    } else {
+      this.props.editTodo(id, text);
+    }
+
+    this.setState({ editing: false });
+  }
+
   handleDoubleClick() {
     this.setState({ editing: true });
   }

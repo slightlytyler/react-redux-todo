@@ -29,6 +29,14 @@ function addTodo(todosState, title) {
   }, ...todosState]);
 }
 
+function editTodo(todosState, id, text) {
+  return todosState.map(todo =>
+    todo.get('id') === id ?
+    todo.set('title', text) :
+    todo
+  );
+}
+
 function removeTodo(todosState, id) {
   return todosState.filter(todo =>
     todo.get('id') !== id
@@ -49,6 +57,8 @@ export default function(state = Map(), action) {
     return state.update('todos', todosState => toggleComplete(todosState, action.id));
   case 'ADD_TODO':
     return state.update('todos', todosState => addTodo(todosState, action.title));
+  case 'EDIT_TODO':
+    return state.update('todos', todosState => editTodo(todosState, action.id, action.text));
   case 'REMOVE_TODO':
     return state.update('todos', todosState => removeTodo(todosState, action.id));
   case 'REMOVE_COMPLETE':

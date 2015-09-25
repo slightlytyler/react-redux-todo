@@ -12,6 +12,10 @@ export function addTodo(title) {
   return { type: types.ADD_TODO, title };
 }
 
+export function editTodo(id, text) {
+  return { type: types.EDIT_TODO, id, text };
+}
+
 export function removeTodo(id) {
   return { type: types.REMOVE_TODO, id };
 }
@@ -19,4 +23,3 @@ export function removeTodo(id) {
 export function removeComplete() {
   return { type: types.REMOVE_COMPLETE };
 }
-
