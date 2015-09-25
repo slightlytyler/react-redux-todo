@@ -1,11 +1,15 @@
 import React from 'react';
 import { Router, Route } from 'react-router';
 
-import { createStore } from 'redux';
+import { compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from './reducer';
 
-import { fromJS } from 'immutable';
+import persistState, {mergePersistedState} from 'redux-localstorage';
+import adapter from 'redux-localstorage/lib/adapters/localStorage';
+
+import { List, fromJS } from 'immutable';
+
+import rootReducer from './reducer';
 
 import { setState } from './actions/todos';
 
@@ -13,22 +17,25 @@ import { AppContainer } from './components/App';
 
 require('./styles.css');
 
-const store = createStore(reducer);
-store.dispatch(setState({
-  todos: [{
-    id: 1,
-    title: 'Learn react and redux',
-    isComplete: true
-  }, {
-    id: 2,
-    title: '...',
-    isComplete: true
-  }, {
-    id: 3,
-    title: 'Profit',
-    isComplete: false
-  }]
-}));
+const reducer = compose(
+  mergePersistedState((initialState, persistedState) => {
+    return initialState.merge(fromJS(persistedState));
+  })
+)(rootReducer);
+
+const storage = compose()(adapter(window.localStorage));
+
+const createPersistentStore = compose(
+  persistState(storage, 'react-redux-todo')
+)(createStore);
+
+const store = createPersistentStore(reducer);
+
+if (!store.getState().get('todos')) {
+  store.dispatch(setState({
+    todos: List()
+  }));
+}
 
 React.render((
   <Provider store={store}>

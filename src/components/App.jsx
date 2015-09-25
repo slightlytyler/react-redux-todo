@@ -2,21 +2,28 @@ import React, { Component, PropTypes } from 'react/addons';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { List } from 'immutable';
+
 import * as TodoActions from '../actions/todos';
 
 import Main from './Main';
 
 export class App extends Component {
+  getTodos() {
+    return this.props.todos || List();
+  }
+
   filteredTodos() {
     const filter = this.props.route.filter;
     const filterBool = filter === 'completed';
+    const todos = this.getTodos();
 
     if (filter) {
-      return this.props.todos.filter(todo =>
+      return todos.filter(todo =>
         todo.get('isComplete') === filterBool
       );
     } else {
-      return false;
+      return todos;
     }
   }
 
@@ -24,10 +31,8 @@ export class App extends Component {
     const { dispatch } = this.props;
     const actions = bindActionCreators(TodoActions, dispatch);
 
-    const todos = this.filteredTodos() || this.props.todos;
-
     return <div>
-      <Main todos={todos} {...actions}/>
+      <Main todos={this.filteredTodos()} {...actions}/>
 
       <footer className="info">
         <p>Double-click to edit a todo</p>

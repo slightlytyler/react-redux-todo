@@ -67,6 +67,13 @@ export class TodoItem extends Component {
   }
 };
 
+TodoItem.propTypes = {
+  todo: PropTypes.object.isRequired,
+  toggle: PropTypes.func.isRequired,
+  editTodo: PropTypes.func.isRequired,
+  removeTodo: PropTypes.func.isRequired
+}
+
 TodoItem.mixins = [React.addons.PureRenderMixin];
 
 export default TodoItem;
